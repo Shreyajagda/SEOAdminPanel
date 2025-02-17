@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Admin Data</title>
+    <link rel="stylesheet" href="../assets/css/styles.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+</head>
+<body>
+    <div class="page-wrapper" id="main-wrapper" data-layout="vertical" data-navbarbg="skin6" data-sidebartype="full" data-sidebar-position="fixed" data-header-position="fixed">
+        
+        <!-- Sidebar Include -->
+        <%- include("./partial/sidebar.ejs")%>
+
+        <div class="body-wrapper">
+            <%- include("./partial/header.ejs")%>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-12">
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-center mb-4">
+                                    <h5 class="card-title fw-semibold">Admin List</h5>
+                                    <a href="/adminForm" class="btn btn-primary">
+                                        <i class="bi bi-plus-circle me-2"></i>Add New Admin
+                                    </a>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table table-hover">
+                                        <thead class="table-light">
+                                            <tr>
+                                                <th>Profile</th>
+                                                <th>First Name</th>
+                                                <th>Last Name</th>
+                                                <th>Email</th>
+                                                <th>City</th>
+                                                <th>Gender</th>
+                                                <th>Hobbies</th>
+                                                <th>Actions</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <% admins.map((admin) => { %>
+                                                <tr class="align-middle">
+                                                    <td>
+                                                        <img src="/<%= admin.image %>"
+                                                            alt="Profile" 
+                                                            class="rounded-circle"
+                                                            width="40" 
+                                                            height="40"
+                                                            style="object-fit: cover;">
+                                                    </td>
+                                                    <td><%= admin.firstName %></td>
+                                                    <td><%= admin.lastName %></td>
+                                                    <td><%= admin.email %></td>
+                                                    <td><%= admin.city %></td>
+                                                    <td><%= admin.gender %></td>
+                                                    <td>
+                                                        <% admin.hobbies.map((hobby, index) => { %>
+                                                            <span class="badge bg-primary"><%= hobby %></span>
+                                                            <%= index < admin.hobbies.length - 1 ? ' ' : '' %>
+                                                        <% }); %>
+                                                    </td>
+                                                    <td>
+                                                        <div class="d-flex gap-2">
+                                                            <a href="/adminEdit/<%= admin._id %>">
+                                                                <button class="btn btn-sm btn-warning">
+                                                                    <i class="bi bi-pencil"></i>
+                                                                </button>
+                                                            </a>
+                                                            <a href="/adminDelete/<%= admin._id %>">
+                                                                <button class="btn btn-sm btn-danger"
+                                                                        onclick="return confirm('Are you sure you want to delete this admin?')">
+                                                                    <i class="bi bi-trash"></i>
+                                                                </button>
+                                                            </a>
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            <% }); %>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Footer -->
+            <div class="py-6 px-6 text-center">
+                <p class="mb-0 fs-4">Design and Developed by <a href="https://adminmart.com/" target="_blank" class="pe-1 text-primary text-decoration-underline">AdminMart.com</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../assets/libs/jquery/dist/jquery.min.js"></script>
+    <script src="../assets/libs/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../assets/js/sidebarmenu.js"></script>
+    <script src="../assets/js/app.min.js"></script>
+</body>
+</html>
