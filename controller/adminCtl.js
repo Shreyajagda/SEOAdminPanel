@@ -24,7 +24,8 @@ module.exports.logout = (req, res) => {
 }
 
 module.exports.dashBoard = (req, res) => {
-  req.cookies.adminData ? res.render('dashBoard') : res.redirect('/')
+  // req.cookies.adminData ? res.render('dashBoard') : res.redirect('/')
+  res.render('dashBoard')
 }
 
 module.exports.adminForm = (req, res) => {
@@ -37,7 +38,6 @@ module.exports.adminTable = async (req, res) => {
     res.render('adminTable', { admins }) 
   })
 }
-
 
 module.exports.addAdmin = async (req, res) => {
   req.body.image = req.file.path 
